@@ -5,17 +5,16 @@ class Solution {
          for(int i=0;i<n;i++)
          {
             List<Integer> row=new ArrayList<>();
-            int count=1;
             for(int j=0;j<=i;j++)
             {
-                if(i==0 || j==0)
+                if(j==0 || j==i)
                 {
-                    row.add(count);
+                    row.add(1);
                 }
                 else
                 {
-                    count=(count*(i-j+1))/j;
-                    row.add(count);
+                    int sum=pas.get(i-1).get(j-1)+pas.get(i-1).get(j);
+                    row.add(sum);
                 }
             }
             pas.add(row);
