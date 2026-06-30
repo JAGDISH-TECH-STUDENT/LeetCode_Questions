@@ -1,17 +1,19 @@
-// Sliding Window Approach
-// English: Expand window until all three chars present, then shrink from left
-// Hindi: Window ko expand karte hain jab tak 'a','b','c' na mil jaye, phir left se shrink karte hain
+// Index Tracking Approach
+// English: Track last seen index of a,b,c. At each step, min(lastA,lastB,lastC)+1 gives valid substrings.
+// Hindi: Har character ka last index track karte hain. Minimum index +1 se valid substrings milte hain.
 
 class Solution {
     public int numberOfSubstrings(String s) {
-        int[] freq = new int[3]; // count of a,b,c
-        int left = 0, result = 0;
-        for (int right = 0; right < s.length(); right++) {
-            freq[s.charAt(right) - 'a']++;
-            while (freq[0] > 0 && freq[1] > 0 && freq[2] > 0) {
-                result += s.length() - right; // all substrings ending at right are valid
-                freq[s.charAt(left) - 'a']--;
-                left++;
+        int lastA = -1, lastB = -1, lastC = -1;
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == 'a') lastA = i;
+            if (c == 'b') lastB = i;
+            if (c == 'c') lastC = i;
+            int minIndex = Math.min(lastA, Math.min(lastB, lastC));
+            if (minIndex != -1) {
+                result += minIndex + 1;
             }
         }
         return result;
