@@ -9,7 +9,7 @@ class Solution {
             } else if (!Character.isLetter(sb.charAt(right))) {
                 right--;
             } else {
-                // Swap letters
+                
                 char temp = sb.charAt(left);
                 sb.setCharAt(left, sb.charAt(right));
                 sb.setCharAt(right, temp);
