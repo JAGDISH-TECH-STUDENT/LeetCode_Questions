@@ -1,6 +1,6 @@
 class Solution {
     public boolean isValidSudoku(char[][] board) {
-        // Check rows
+       
         for (int i = 0; i < 9; i++) {
             Set<Character> rowSet = new HashSet<>();
             for (int j = 0; j < 9; j++) {
@@ -12,7 +12,7 @@ class Solution {
             }
         }
 
-        // Check columns
+    
         for (int j = 0; j < 9; j++) {
             Set<Character> colSet = new HashSet<>();
             for (int i = 0; i < 9; i++) {
@@ -24,7 +24,6 @@ class Solution {
             }
         }
 
-        // Check 3x3 sub-boxes
         for (int boxRow = 0; boxRow < 3; boxRow++) {
             for (int boxCol = 0; boxCol < 3; boxCol++) {
                 Set<Character> boxSet = new HashSet<>();
