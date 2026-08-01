@@ -14,13 +14,13 @@ class Solution {
         if(i==j){
             return nums[i];
         }
-        // if(dp[i][j]!=-1){
-        //     return dp[i][j];
-        // }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
 
         int take_i=nums[i]-solve(i+1,j,nums,dp);
         int take_j=nums[j]-solve(i,j-1,nums,dp);
-        return Math.max(take_i,take_j);
+        return dp[i][j]=Math.max(take_i,take_j);
 
     }
 }
