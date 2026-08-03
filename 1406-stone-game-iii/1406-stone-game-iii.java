@@ -1,36 +1,31 @@
-import java.util.*;
-
 class Solution {
-    int n;
-    int[] t;  
-    
-    private int solve(int[] stoneValue, int i) {
-        if (i == n) return 0;
-        
-        if (t[i] != Integer.MIN_VALUE) return t[i];
-        
-        t[i] = stoneValue[i] - solve(stoneValue, i + 1);
-
-        if (i + 1 < n) {
-            t[i] = Math.max(t[i], stoneValue[i] + stoneValue[i + 1] - solve(stoneValue, i + 2));
-        }
-
-        if (i + 2 < n) {
-            t[i] = Math.max(t[i], stoneValue[i] + stoneValue[i + 1] + stoneValue[i + 2] - solve(stoneValue, i + 3));
-        }
-        
-        return t[i];
-    }
-    
     public String stoneGameIII(int[] stoneValue) {
-        n = stoneValue.length;
-        t = new int[n + 1];
-        Arrays.fill(t, Integer.MIN_VALUE);  
+        int n = stoneValue.length;
         
-        int diff = solve(stoneValue, 0);
+        int[] t = new int[n + 1]; 
+        // t[i] = Alice - Bob score difference starting at index i
         
-        if (diff < 0) return "Bob";
-        else if (diff > 0) return "Alice";
+        for (int i = n - 1; i >= 0; i--) {
+            // Option 1: Take one stone
+            t[i] = stoneValue[i] - t[i + 1];
+            
+            // Option 2: Take two stones
+            if (i + 2 <= n) {
+                t[i] = Math.max(t[i], stoneValue[i] + stoneValue[i + 1] - t[i + 2]);
+            }
+            
+            // Option 3: Take three stones
+            if (i + 3 <= n) {
+                t[i] = Math.max(t[i], stoneValue[i] + stoneValue[i + 1] + stoneValue[i + 2] - t[i + 3]);
+            }
+        }
+        
+        int diff = t[0];
+        if (diff < 0) {
+            return "Bob";
+        } else if (diff > 0) {
+            return "Alice";
+        }
         return "Tie";
     }
 }
