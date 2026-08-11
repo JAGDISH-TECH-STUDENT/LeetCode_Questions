@@ -1,4 +1,6 @@
-class Solution {
+// we can also use hashset and check technique if it did not give the auxilary space complexity.
+
+class Solution {   
     public int firstMissingPositive(int[] nums) {
         int n=nums.length;
         for(int i=0;i<n;i++){
