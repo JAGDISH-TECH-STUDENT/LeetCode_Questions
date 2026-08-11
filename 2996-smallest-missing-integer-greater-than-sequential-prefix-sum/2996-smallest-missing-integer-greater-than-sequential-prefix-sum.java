@@ -8,7 +8,7 @@ class Solution {
                 break;
             }
         }
-        HashSet<Integer> st=new HashSet<>();
+        java.util.HashSet<Integer> st=new  java.util.HashSet<>();
         int max=sum;
         for(int s:nums){
            st.add(s); 
