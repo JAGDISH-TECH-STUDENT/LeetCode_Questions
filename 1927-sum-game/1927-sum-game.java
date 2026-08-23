@@ -1,28 +1,42 @@
 class Solution {
-
     public boolean sumGame(String num) {
         int n = num.length();
-        int[] left = get(num.substring(0, n / 2));
-        int[] right = get(num.substring(n / 2, n));
+        int leftKnownSum = 0;
+        int rightKnownSum = 0;
 
-        int n0 = left[0],
-            q0 = left[1];
-        int n1 = right[0],
-            q1 = right[1];
+        int leftQnMarkCount = 0;
+        int rightQnMarkCount = 0;
 
-        return (q0 + q1) % 2 == 1 || n0 - n1 != ((q1 - q0) * 9) / 2;
-    }
-
-    private int[] get(String s) {
-        int nn = 0,
-            qq = 0;
-        for (char ch : s.toCharArray()) {
+        for (int i = 0; i < n; i++) {
+            char ch = num.charAt(i);
             if (ch == '?') {
-                qq++;
+                if (i < n / 2) {
+                    leftQnMarkCount++;
+                } else {
+                    rightQnMarkCount++;
+                }
             } else {
-                nn += ch - '0';
+                int digit = ch - '0';
+                if (i < n / 2) {
+                    leftKnownSum += digit;
+                } else {
+                    rightKnownSum += digit;
+                }
             }
         }
-        return new int[] { nn, qq };
+
+        int totalQnMarks = leftQnMarkCount + rightQnMarkCount;
+        if (totalQnMarks % 2 == 1) { // Odd → Alice always wins
+            return true;
+        }
+
+        int LEFT = 2 * leftKnownSum + 9 * leftQnMarkCount;
+        int RIGHT = 2 * rightKnownSum + 9 * rightQnMarkCount;
+
+        if (LEFT == RIGHT) { // Bob wins
+            return false;
+        }
+
+        return true;
     }
 }
