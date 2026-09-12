@@ -105,14 +105,12 @@ class Solution {
                 if (dp[k - 1][p] != null) {
 
                     int[] ids = addSorted(
-                        dp[k - 1][p].ids,
-                        originalIndex
-                    );
+                            dp[k - 1][p].ids,
+                            originalIndex);
 
                     Node take = new Node(
-                        dp[k - 1][p].score + weight,
-                        ids
-                    );
+                            dp[k - 1][p].score + weight,
+                            ids);
 
                     if (better(take, dp[k][i])) {
                         dp[k][i] = take;
