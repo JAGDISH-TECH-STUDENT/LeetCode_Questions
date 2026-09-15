@@ -5,7 +5,7 @@ class Solution {
 
         // Precompute palindromes
         for (int center = 0; center < n; center++) {
-            expand(s, center, center, isPal);     // odd length
+            expand(s, center, center, isPal); // odd length
             expand(s, center, center + 1, isPal); // even length
         }
 
@@ -25,7 +25,8 @@ class Solution {
         int n = s.length();
         while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
             isPal[l][r] = true;
-            l--; r++;
+            l--;
+            r++;
         }
     }
 }
